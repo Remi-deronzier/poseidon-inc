@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 
@@ -18,7 +17,6 @@ import lombok.Data;
 @Entity
 @Data
 @DynamicUpdate
-@Table(name = "Curvepoint")
 public class CurvePoint {
 
     public CurvePoint(int curveId, double term, double value) {

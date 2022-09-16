@@ -7,18 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
 
 import org.hibernate.annotations.DynamicUpdate;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
 @DynamicUpdate
-@Table(name = "Bidlist")
 public class BidList {
 
     public BidList(String account, String type, double bidQuantity) {
@@ -29,74 +27,61 @@ public class BidList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "BidListId")
+    @Column()
     private int BidListId;
 
-    @Column(name = "account", nullable = false)
-    @NotBlank(message = "Account is mandatory")
+    @Column(nullable = false)
     private String account;
 
-    @Column(name = "type", nullable = false)
-    @NotBlank(message = "Type is mandatory")
+    @Column(nullable = false)
     private String type;
 
-    @Column(name = "bidQuantity", nullable = false)
-    @NotBlank(message = "Bid quantity is mandatory")
-    @Positive(message = "Bid quantity must be a number strictyl greater than 0")
+    @Column(nullable = false)
     private Double bidQuantity;
 
-    @Column(name = "askQuantity")
+    @Column()
     private Double askQuantity;
 
-    @Column(name = "bid")
+    @Column()
     private Double bid;
 
-    @Column(name = "ask")
+    @Column()
     private Double ask;
 
-    @Column(name = "benchmark")
+    @Column()
     private String benchmark;
 
-    @Column(name = "bidListDate")
+    @Column()
     private Timestamp bidListDate;
 
-    @Column(name = "commentary")
+    @Column()
     private String commentary;
 
-    @Column(name = "security")
+    @Column()
     private String security;
 
-    @Column(name = "status")
+    @Column()
     private String status;
 
-    @Column(name = "trader")
+    @Column()
     private String trader;
 
-    @Column(name = "book")
+    @Column()
     private String book;
 
-    @Column(name = "creationName")
-    private String creationName;
-
-    @Column(name = "creationDate")
+    @Column()
     private Timestamp creationDate;
 
-    @Column(name = "revisionName")
-    private String revisionName;
-
-    @Column(name = "revisionDate")
+    @Column()
     private Timestamp revisionDate;
 
-    @Column(name = "dealName")
-    private String dealName;
-
-    @Column(name = "dealType")
+    @Column()
     private String dealType;
 
-    @Column(name = "sourceListId")
+    @Column()
     private String sourceListId;
 
-    @Column(name = "side")
+    @Column()
     private String side;
 
 }
