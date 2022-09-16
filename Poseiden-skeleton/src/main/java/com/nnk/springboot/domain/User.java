@@ -11,10 +11,12 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity
 @Data
+@AllArgsConstructor
 @DynamicUpdate
 @Table(name = "Users")
 public class User {

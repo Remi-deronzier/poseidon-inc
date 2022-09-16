@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.dto.BidListDto;
 import com.nnk.springboot.services.BidListService;
 
 @RestController
@@ -57,5 +59,19 @@ public class BidListController {
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
         // TODO: Find Bid by Id and delete the bid, return to Bid list
         return "redirect:/bidList/list";
+    }
+
+    private BidListDto convertToDto(BidList entity) {
+        BidListDto dto = new BidListDto(entity.getAccount(), entity.getType(), entity.getBidQuantity(),
+                entity.getBidListId());
+        return dto;
+    }
+
+    private BidList convertToEntity(BidListDto dto) {
+        BidList bidList = new BidList(dto.getAccount(), dto.getType(), dto.getBidQuantity());
+        if (!StringUtils.isEmpty(dto.getBidListId())) {
+            bidList.setBidListId(dto.getBidListId());
+        }
+        return bidList;
     }
 }

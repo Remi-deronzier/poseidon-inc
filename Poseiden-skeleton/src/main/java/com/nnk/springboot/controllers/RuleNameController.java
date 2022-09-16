@@ -1,23 +1,25 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.RuleName;
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.validation.Valid;
+import com.nnk.springboot.domain.RuleName;
+import com.nnk.springboot.dto.RuleNameDto;
 
 @Controller
 public class RuleNameController {
     // TODO: Inject RuleName service
 
     @RequestMapping("/ruleName/list")
-    public String home(Model model)
-    {
+    public String home(Model model) {
         // TODO: find all RuleName, add to model
         return "ruleName/list";
     }
@@ -41,8 +43,9 @@ public class RuleNameController {
 
     @PostMapping("/ruleName/update/{id}")
     public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName,
-                             BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update RuleName and return RuleName list
+            BindingResult result, Model model) {
+        // TODO: check required fields, if valid call service to update RuleName and
+        // return RuleName list
         return "redirect:/ruleName/list";
     }
 
@@ -50,5 +53,20 @@ public class RuleNameController {
     public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
         // TODO: Find RuleName by Id and delete the RuleName, return to Rule list
         return "redirect:/ruleName/list";
+    }
+
+    private RuleNameDto convertToDto(RuleName entity) {
+        RuleNameDto dto = new RuleNameDto(entity.getId(), entity.getName(), entity.getDescription(), entity.getJson(),
+                entity.getJson(), entity.getSqlStr(), entity.getSqlPart());
+        return dto;
+    }
+
+    private RuleName convertToEntity(RuleNameDto dto) {
+        RuleName ruleName = new RuleName(dto.getName(), dto.getDescription(), dto.getJson(), dto.getTemplate(),
+                dto.getSqlStr(), dto.getSqlPart());
+        if (!StringUtils.isEmpty(dto.getId())) {
+            ruleName.setId(dto.getId());
+        }
+        return ruleName;
     }
 }

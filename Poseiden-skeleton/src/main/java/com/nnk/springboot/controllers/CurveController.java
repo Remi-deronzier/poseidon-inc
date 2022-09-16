@@ -1,23 +1,25 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.CurvePoint;
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.validation.Valid;
+import com.nnk.springboot.domain.CurvePoint;
+import com.nnk.springboot.dto.CurvePointDto;
 
 @Controller
 public class CurveController {
     // TODO: Inject Curve Point service
 
     @RequestMapping("/curvePoint/list")
-    public String home(Model model)
-    {
+    public String home(Model model) {
         // TODO: find all Curve Point, add to model
         return "curvePoint/list";
     }
@@ -41,8 +43,9 @@ public class CurveController {
 
     @PostMapping("/curvePoint/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
-                             BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Curve and return Curve list
+            BindingResult result, Model model) {
+        // TODO: check required fields, if valid call service to update Curve and return
+        // Curve list
         return "redirect:/curvePoint/list";
     }
 
@@ -50,5 +53,18 @@ public class CurveController {
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
         // TODO: Find Curve by Id and delete the Curve, return to Curve list
         return "redirect:/curvePoint/list";
+    }
+
+    private CurvePointDto convertToDto(CurvePoint entity) {
+        CurvePointDto dto = new CurvePointDto(entity.getId(), entity.getCurveId(), entity.getTerm(), entity.getValue());
+        return dto;
+    }
+
+    private CurvePoint convertToEntity(CurvePointDto dto) {
+        CurvePoint curvePoint = new CurvePoint(dto.getCurveId(), dto.getTerm(), dto.getValue());
+        if (!StringUtils.isEmpty(dto.getId())) {
+            curvePoint.setId(dto.getId());
+        }
+        return curvePoint;
     }
 }
