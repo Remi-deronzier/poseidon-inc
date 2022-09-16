@@ -1,7 +1,11 @@
 package com.nnk.springboot.controllers;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -13,45 +17,60 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.dto.CurvePointDto;
+import com.nnk.springboot.services.CurvePointService;
 
 @Controller
 public class CurveController {
-    // TODO: Inject Curve Point service
+    @Autowired
+    private CurvePointService curvePointService;
 
     @RequestMapping("/curvePoint/list")
     public String home(Model model) {
-        // TODO: find all Curve Point, add to model
+        List<CurvePoint> curvePoints = curvePointService.findAll();
+        List<CurvePointDto> curvePointsDtos = curvePoints.stream().map(curvePoint -> convertToDto(curvePoint))
+                .collect(Collectors.toList());
+        model.addAttribute("curvePointDtos", curvePointsDtos);
         return "curvePoint/list";
     }
 
     @GetMapping("/curvePoint/add")
-    public String addBidForm(CurvePoint bid) {
+    public String addBidForm(Model model) {
+        model.addAttribute("curvePointDto", new CurvePointDto(null, 0, 0, 0));
         return "curvePoint/add";
     }
 
     @PostMapping("/curvePoint/validate")
-    public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return Curve list
+    public String validate(@Valid CurvePointDto curvePointDto, BindingResult result, Model model) {
+        if (!result.hasErrors()) {
+            CurvePoint curvePoint = convertToEntity(curvePointDto);
+            curvePointService.save(curvePoint);
+            return "redirect:/curvePoint/list";
+        }
         return "curvePoint/add";
     }
 
     @GetMapping("/curvePoint/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get CurvePoint by Id and to model then show to the form
+        CurvePoint curvePoint = curvePointService.findById(id);
+        CurvePointDto curvePointDto = convertToDto(curvePoint);
+        model.addAttribute("curvePointDto", curvePointDto);
         return "curvePoint/update";
     }
 
     @PostMapping("/curvePoint/update/{id}")
-    public String updateBid(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
+    public String updateBid(@PathVariable("id") Integer id, @Valid CurvePointDto curvePointDto,
             BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Curve and return
-        // Curve list
+        if (result.hasErrors()) {
+            return "curvePoint/update";
+        }
+        CurvePoint curvePoint = convertToEntity(curvePointDto);
+        curvePointService.save(curvePoint);
         return "redirect:/curvePoint/list";
     }
 
     @GetMapping("/curvePoint/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find Curve by Id and delete the Curve, return to Curve list
+        curvePointService.delete(id);
         return "redirect:/curvePoint/list";
     }
 
