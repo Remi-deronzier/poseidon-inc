@@ -27,9 +27,9 @@ public class CurveController {
     @RequestMapping("/curvePoint/list")
     public String home(Model model) {
         List<CurvePoint> curvePoints = curvePointService.findAll();
-        List<CurvePointDto> curvePointsDtos = curvePoints.stream().map(curvePoint -> convertToDto(curvePoint))
+        List<CurvePointDto> curvePointDtos = curvePoints.stream().map(curvePoint -> convertToDto(curvePoint))
                 .collect(Collectors.toList());
-        model.addAttribute("curvePointDtos", curvePointsDtos);
+        model.addAttribute("curvePointDtos", curvePointDtos);
         return "curvePoint/list";
     }
 

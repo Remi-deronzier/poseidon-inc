@@ -8,15 +8,17 @@
 </head>
 <body>
 <div class="container">
+
 	<div class="row">
-		<h2>Update CurvePoint</h2>
+		<h2>Add New Trade</h2>
 	</div>
 
 	<div class="row">
-		<form action="#" th:action="@{/curvePoint/update/{id}(id=${curvePoint.id})}" th:object="${curvePoint}" method="post" class="form-horizontal" style="width: 100%">
+		<form action="#" th:action="@{/trade/validate}" th:object="${trade}" method="post" class="form-horizontal" style="width: 100%">
 			<!--
-			TODO: Create a form to edit the values of CurvePoint, there are 2 buttons: Update data and Cancel to the Curve Point
+			TODO: Create a form to input the values of Trade, there are 2 buttons: Save data and Cancel to the list Trade
 			 -->
+
 		</form>
 	</div>
 

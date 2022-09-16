@@ -8,13 +8,13 @@
   <body>
     <div class="container">
       <div class="row">
-        <h2>Add New Curve Point</h2>
+        <h2>Update CurvePoint</h2>
       </div>
 
       <div class="row">
         <form
           action="#"
-          th:action="@{/curvePoint/validate}"
+          th:action="@{/curvePoint/update/{id}(id=${curvePointDto.id})}"
           th:object="${curvePointDto}"
           method="post"
           class="form-horizontal"
@@ -29,6 +29,7 @@
                 id="curveId"
                 placeholder="Curve Id"
                 class="col-4"
+                required
               />
               <p
                 class="text-danger"
@@ -47,6 +48,7 @@
                 id="term"
                 placeholder="Term"
                 class="col-4"
+                required
               />
               <p
                 class="text-danger"
@@ -65,6 +67,7 @@
                 id="value"
                 placeholder="Value"
                 class="col-4"
+                required
               />
               <p
                 class="text-danger"
@@ -76,13 +79,14 @@
 
           <div class="form-group">
             <div class="col-sm-12">
+              <input type="hidden" th:field="*{id}" />
               <a class="btn btn-danger btn-sm" href="/curvePoint/list"
                 >Cancel</a
               >
               <input
                 class="btn btn-primary btn-sm"
                 type="submit"
-                value="Add CurvePoint"
+                value="Update CurvePoint"
               />
             </div>
           </div>

@@ -9,9 +9,11 @@ import javax.persistence.Id;
 import org.hibernate.annotations.DynamicUpdate;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
 @DynamicUpdate
 public class Rating {
 
@@ -25,19 +27,18 @@ public class Rating {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private int id;
 
-    @Column(name = "moodysRating")
+    @Column
     private String moodysRating;
 
-    @Column(name = "sandPRating")
+    @Column
     private String sandPRating;
 
-    @Column(name = "fitchRating")
+    @Column
     private String fitchRating;
 
-    @Column(name = "orderNumber")
+    @Column
     private int orderNumber;
 
 }

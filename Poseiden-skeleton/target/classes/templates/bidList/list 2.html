@@ -25,31 +25,30 @@
           </form>
         </div>
       </div>
-      <div class="row"><h2>Rating List</h2></div>
+      <div class="row"><h2>Bid List</h2></div>
       <div class="row">
-        <a href="/rating/add" class="btn btn-primary btn-sm">Add New</a>
+        <a href="/bidList/add" class="btn btn-primary btn-sm">Add New</a>
         <table class="table table-bordered">
           <thead>
             <tr>
               <th>Id</th>
-              <th>MoodysRating</th>
-              <th>SandPRating</th>
-              <th>FitchRating</th>
-              <th>Order</th>
+              <th>Account</th>
+              <th>Type</th>
+              <th>Bid Quantity</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr th:each="ratingDto : ${ratingDtos}">
-              <td th:text="${ratingDto.id}"></td>
-              <td th:text="${ratingDto.moodysRating}"></td>
-              <td th:text="${ratingDto.sandPRating}"></td>
-              <td th:text="${ratingDto.fitchRating}"></td>
-              <td th:text="${ratingDto.orderNumber}"></td>
+            <tr th:each="bidListDto : ${bidListDtos}">
+              <td th:text="${bidListDto.BidListId}"></td>
+              <td th:text="${bidListDto.account}"></td>
+              <td th:text="${bidListDto.type}"></td>
+              <td th:text="${bidListDto.bidQuantity}"></td>
               <td class="text-center">
-                <a th:href="@{/rating/update/{id}(id=${ratingDto.id})}">Edit</a
+                <a th:href="@{/bidList/update/{id}(id=${bidListDto.BidListId})}"
+                  >Edit</a
                 >&nbsp;|&nbsp;
-                <a th:href="@{/rating/delete/{id}(id=${ratingDto.id})}"
+                <a th:href="@{/bidList/delete/{id}(id=${bidListDto.BidListId})}"
                   >Delete</a
                 >
               </td>

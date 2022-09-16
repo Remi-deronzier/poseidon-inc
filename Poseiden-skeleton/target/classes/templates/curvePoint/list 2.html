@@ -25,31 +25,30 @@
           </form>
         </div>
       </div>
-      <div class="row"><h2>Rating List</h2></div>
+      <div class="row"><h2>Curve Point List</h2></div>
       <div class="row">
-        <a href="/rating/add" class="btn btn-primary btn-sm">Add New</a>
+        <a href="/curvePoint/add" class="btn btn-primary btn-sm">Add New</a>
         <table class="table table-bordered">
           <thead>
             <tr>
               <th>Id</th>
-              <th>MoodysRating</th>
-              <th>SandPRating</th>
-              <th>FitchRating</th>
-              <th>Order</th>
+              <th>CurvePointId</th>
+              <th>Term</th>
+              <th>Value</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr th:each="ratingDto : ${ratingDtos}">
-              <td th:text="${ratingDto.id}"></td>
-              <td th:text="${ratingDto.moodysRating}"></td>
-              <td th:text="${ratingDto.sandPRating}"></td>
-              <td th:text="${ratingDto.fitchRating}"></td>
-              <td th:text="${ratingDto.orderNumber}"></td>
+            <tr th:each="curvePointDto : ${curvePointDtos}">
+              <td th:text="${curvePointDto.id}"></td>
+              <td th:text="${curvePointDto.curveId}"></td>
+              <td th:text="${curvePointDto.term}"></td>
+              <td th:text="${curvePointDto.value}"></td>
               <td class="text-center">
-                <a th:href="@{/rating/update/{id}(id=${ratingDto.id})}">Edit</a
+                <a th:href="@{/curvePoint/update/{id}(id=${curvePointDto.id})}"
+                  >Edit</a
                 >&nbsp;|&nbsp;
-                <a th:href="@{/rating/delete/{id}(id=${ratingDto.id})}"
+                <a th:href="@{/curvePoint/delete/{id}(id=${curvePointDto.id})}"
                   >Delete</a
                 >
               </td>
