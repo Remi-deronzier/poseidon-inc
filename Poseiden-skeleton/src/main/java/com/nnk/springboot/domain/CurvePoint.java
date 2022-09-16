@@ -11,29 +11,46 @@ import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "curvepoint")
+@DynamicUpdate
+@Table(name = "Curvepoint")
 public class CurvePoint {
+
+    public CurvePoint(int curveId, double term, double value) {
+        this.curveId = curveId;
+        this.term = term;
+        this.value = value;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
-    @Column(nullable = false)
+
+    @Column(name = "curveId", nullable = false)
     @NotBlank(message = "Curve id must not be null")
     @Digits(fraction = 0, integer = 10, message = "Curve id must be an integer")
     private int curveId;
-    @Column
+
+    @Column(name = "asOfDate")
     private Timestamp asOfDate;
-    @Column(nullable = false)
+
+    @Column(name = "term", nullable = false)
     @NotBlank(message = "Term must not be null")
     @Digits(fraction = 2, integer = 10, message = "Term must be a number")
     private Double term;
-    @Column(nullable = false)
+
+    @Column(name = "value", nullable = false)
     @NotBlank(message = "Value must not be null")
     @Digits(fraction = 2, integer = 10, message = "Value must be a number")
     private Double value;
-    @Column
+
+    @Column(name = "creationDate")
     private Timestamp creationDate;
+
 }

@@ -7,25 +7,46 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "rulename")
+@DynamicUpdate
+@Table(name = "Rulename")
 public class RuleName {
+
+    public RuleName(String name, String description, String json, String template, String sqlStr, String sqlPart) {
+        this.name = name;
+        this.description = description;
+        this.json = json;
+        this.template = template;
+        this.sqlPart = sqlPart;
+        this.sqlStr = sqlStr;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
-    @Column
+
+    @Column(name = "name")
     private String name;
-    @Column
+
+    @Column(name = "description")
     private String description;
-    @Column
+
+    @Column(name = "json")
     private String json;
-    @Column
+
+    @Column(name = "template")
     private String template;
-    @Column
+
+    @Column(name = "sqlStr")
     private String sqlStr;
-    @Column
+
+    @Column(name = "sqlPart")
     private String sqlPart;
+
 }

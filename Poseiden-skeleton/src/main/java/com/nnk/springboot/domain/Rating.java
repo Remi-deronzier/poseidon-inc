@@ -7,21 +7,39 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "rating")
+@DynamicUpdate
+@Table(name = "Rating")
 public class Rating {
+
+    public Rating(String moodysRating, String sandPRating, String fitchRating,
+            int orderNumber) {
+        this.moodysRating = moodysRating;
+        this.sandPRating = sandPRating;
+        this.fitchRating = fitchRating;
+        this.orderNumber = orderNumber;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
-    @Column
+
+    @Column(name = "moodysRating")
     private String moodysRating;
-    @Column
+
+    @Column(name = "sandPRating")
     private String sandPRating;
-    @Column
+
+    @Column(name = "fitchRating")
     private String fitchRating;
-    @Column
+
+    @Column(name = "orderNumber")
     private int orderNumber;
+
 }

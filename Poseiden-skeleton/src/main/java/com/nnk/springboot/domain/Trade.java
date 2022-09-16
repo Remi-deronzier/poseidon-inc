@@ -9,53 +9,84 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "trade")
+@DynamicUpdate
+@Table(name = "Trade")
 public class Trade {
+
+    public Trade(String account, String type) {
+        this.account = account;
+        this.type = type;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "tradeId")
     private int tradeId;
-    @Column
+
+    @Column(name = "account")
     private String account;
-    @Column
+
+    @Column(name = "type")
     private String type;
-    @Column
+
+    @Column(name = "buyQuantity")
     private Double buyQuantity;
-    @Column
+
+    @Column(name = "sellQuantity")
     private Double sellQuantity;
-    @Column
+
+    @Column(name = "buyPrice")
     private Double buyPrice;
-    @Column
+
+    @Column(name = "sellPrice")
     private Double sellPrice;
-    @Column
+
+    @Column(name = "benchmark")
     private String benchmark;
-    @Column
+
+    @Column(name = "tradeDate")
     private Timestamp tradeDate;
-    @Column
+
+    @Column(name = "security")
     private String security;
-    @Column
+
+    @Column(name = "status")
     private String status;
-    @Column
+
+    @Column(name = "trader")
     private String trader;
-    @Column
+
+    @Column(name = "book")
     private String book;
-    @Column
+
+    @Column(name = "creationName")
     private String creationName;
-    @Column
+
+    @Column(name = "creationDate")
     private Timestamp creationDate;
-    @Column
+
+    @Column(name = "revisionName")
     private String revisionName;
-    @Column
+
+    @Column(name = "revisionDate")
     private Timestamp revisionDate;
-    @Column
+
+    @Column(name = "dealName")
     private String dealName;
-    @Column
+
+    @Column(name = "dealType")
     private String dealType;
-    @Column
+
+    @Column(name = "sourceListId")
     private String sourceListId;
-    @Column
+
+    @Column(name = "side")
     private String side;
+
 }
