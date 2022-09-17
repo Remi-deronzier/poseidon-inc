@@ -24,8 +24,8 @@ public class TradeService {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Trade Id:" + id));
     }
 
-    public Trade save(Trade curvePoint) {
-        return tradeRepository.save(curvePoint);
+    public Trade save(Trade trade) {
+        return tradeRepository.save(trade);
     }
 
     public void delete(int id) {

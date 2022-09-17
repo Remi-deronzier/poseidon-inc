@@ -24,8 +24,8 @@ public class RatingService {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Rating Id:" + id));
     }
 
-    public Rating save(Rating curvePoint) {
-        return ratingRepository.save(curvePoint);
+    public Rating save(Rating rating) {
+        return ratingRepository.save(rating);
     }
 
     public void delete(int id) {

@@ -24,8 +24,8 @@ public class RuleNameService {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Rule name Id:" + id));
     }
 
-    public RuleName save(RuleName curvePoint) {
-        return ruleNameRepository.save(curvePoint);
+    public RuleName save(RuleName ruleName) {
+        return ruleNameRepository.save(ruleName);
     }
 
     public void delete(int id) {
