@@ -21,7 +21,7 @@ public class RuleNameService {
 
     public RuleName findById(int id) {
         return ruleNameRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid Curve point Id:" + id));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Rule name Id:" + id));
     }
 
     public RuleName save(RuleName curvePoint) {
@@ -33,7 +33,7 @@ public class RuleNameService {
         if (optionalCurvePoint.isPresent()) {
             ruleNameRepository.deleteById(id);
         } else {
-            new IllegalArgumentException("Invalid Curve point Id:" + id);
+            new IllegalArgumentException("Invalid Rule name Id:" + id);
         }
     }
 
