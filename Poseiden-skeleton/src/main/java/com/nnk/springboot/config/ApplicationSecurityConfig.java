@@ -38,6 +38,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 				.formLogin().permitAll().loginProcessingUrl("/doLogin")
 				.defaultSuccessUrl("/", true)
 				
+				.and().oauth2Login()
+				
 				.and()
 				.logout().permitAll().logoutRequestMatcher(new AntPathRequestMatcher("/app-logout", "POST"))
 				.clearAuthentication(true)
