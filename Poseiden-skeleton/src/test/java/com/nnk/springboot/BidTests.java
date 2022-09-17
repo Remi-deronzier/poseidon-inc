@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.repositories.BidListRepository;
+import com.nnk.springboot.repository.BidListRepository;
+import com.nnk.springboot.web.model.BidList;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
