@@ -1,11 +1,13 @@
 package com.nnk.springboot.dto;
 
+import javax.validation.constraints.NotBlank;
+
 import lombok.Data;
 
 @Data
 public class RuleNameDto {
 
-    public RuleNameDto(int id, String name, String description, String json, String template, String sqlStr,
+    public RuleNameDto(Integer id, String name, String description, String json, String template, String sqlStr,
             String sqlPart) {
         this.id = id;
         this.name = name;
@@ -16,11 +18,24 @@ public class RuleNameDto {
         this.sqlStr = sqlStr;
     }
 
-    private int id;
+    private Integer id;
+
+    @NotBlank(message = "Name must not be blank")
     private String name;
+
+    @NotBlank(message = "Description must not be blank")
     private String description;
+
+    @NotBlank(message = "Json must not be blank")
     private String json;
+
+    @NotBlank(message = "Template must not be blank")
     private String template;
+
+    @NotBlank(message = "Sql str must not be blank")
     private String sqlStr;
+
+    @NotBlank(message = "Sql part must not be blank")
     private String sqlPart;
+
 }

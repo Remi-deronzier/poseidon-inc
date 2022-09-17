@@ -29,16 +29,16 @@ public class Rating {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column
+    @Column(nullable = false)
     private String moodysRating;
 
-    @Column
+    @Column(nullable = false)
     private String sandPRating;
 
-    @Column
+    @Column(nullable = false)
     private String fitchRating;
 
-    @Column
+    @Column(nullable = false)
     private int orderNumber;
 
 }

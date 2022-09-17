@@ -9,9 +9,11 @@ import javax.persistence.Id;
 import org.hibernate.annotations.DynamicUpdate;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
 @DynamicUpdate
 public class RuleName {
 
@@ -26,25 +28,24 @@ public class RuleName {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private int id;
 
-    @Column(name = "name")
+    @Column(nullable = false)
     private String name;
 
-    @Column(name = "description")
+    @Column(nullable = false)
     private String description;
 
-    @Column(name = "json")
+    @Column(nullable = false)
     private String json;
 
-    @Column(name = "template")
+    @Column(nullable = false)
     private String template;
 
-    @Column(name = "sqlStr")
+    @Column(nullable = false)
     private String sqlStr;
 
-    @Column(name = "sqlPart")
+    @Column(nullable = false)
     private String sqlPart;
 
 }
