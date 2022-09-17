@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.nnk.springboot.app.ApplicationRequestInterceptor;
+
 @Configuration
 public class ApplicationMVCConfig implements WebMvcConfigurer {
 

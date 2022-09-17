@@ -1,4 +1,4 @@
-package com.nnk.springboot.config;
+package com.nnk.springboot.util;
 
 import java.io.IOException;
 import java.io.InputStream;

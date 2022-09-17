@@ -3,7 +3,7 @@ CREATE TABLE bid_list (
   bid_list_id tinyint(4) NOT NULL AUTO_INCREMENT,
   account VARCHAR(30) NOT NULL,
   type VARCHAR(30) NOT NULL,
-  bid_quantity DOUBLE,
+  bid_quantity DOUBLE NOT NULL,
   ask_quantity DOUBLE,
   bid DOUBLE ,
   ask DOUBLE,
@@ -30,7 +30,7 @@ CREATE TABLE trade (
   trade_id tinyint(4) NOT NULL AUTO_INCREMENT,
   account VARCHAR(30) NOT NULL,
   type VARCHAR(30) NOT NULL,
-  buy_quantity DOUBLE,
+  buy_quantity DOUBLE NOT NULL,
   sell_quantity DOUBLE,
   buy_price DOUBLE ,
   sell_price DOUBLE,
@@ -54,46 +54,49 @@ CREATE TABLE trade (
 
 CREATE TABLE curve_point (
   id tinyint(4) NOT NULL AUTO_INCREMENT,
-  curve_id tinyint,
+  curve_id  tinyint NOT NULL,
   as_of_date TIMESTAMP,
-  term DOUBLE ,
-  value DOUBLE ,
-  creation_date TIMESTAMP ,
+  term  DOUBLE NOT NULL,
+  value  DOUBLE NOT NULL,
+  creation_date TIMESTAMP,
 
   PRIMARY KEY (Id)
 );
 
 CREATE TABLE rating (
   id tinyint(4) NOT NULL AUTO_INCREMENT,
-  moodys_rating VARCHAR(125),
-  sandprating VARCHAR(125),
-  fitch_rating VARCHAR(125),
-  order_number tinyint,
+  moodys_rating VARCHAR(125) NOT NULL,
+  sandprating VARCHAR(125) NOT NULL,
+  fitch_rating VARCHAR(125) NOT NULL,
+  order_number tinyint NOT NULL,
 
   PRIMARY KEY (Id)
 );
 
 CREATE TABLE rule_name (
   id tinyint(4) NOT NULL AUTO_INCREMENT,
-  name VARCHAR(125),
-  description VARCHAR(125),
-  json VARCHAR(125),
-  template VARCHAR(512),
-  sql_str VARCHAR(125),
-  sql_part VARCHAR(125),
+  name  VARCHAR(125) NOT NULL,
+  description  VARCHAR(125) NOT NULL,
+  json  VARCHAR(125) NOT NULL,
+  template  VARCHAR(512) NOT NULL,
+  sql_str  VARCHAR(125) NOT NULL,
+  sql_part  VARCHAR(125) NOT NULL,
 
   PRIMARY KEY (Id)
 );
 
 CREATE TABLE users (
   id tinyint(4) NOT NULL AUTO_INCREMENT,
-  username VARCHAR(125),
-  password VARCHAR(125),
-  fullname VARCHAR(125),
-  role VARCHAR(125),
+  username VARCHAR(125) NOT NULL,
+  password VARCHAR(125) NOT NULL,
+  fullname VARCHAR(125) NOT NULL,
+  role VARCHAR(125) NOT NULL,
 
-  PRIMARY KEY (Id)
+  PRIMARY KEY (Id),
+  UNIQUE (username)
 );
 
-insert into Users(fullname, username, password, role) values("Administrator", "admin", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "ADMIN");
-insert into Users(fullname, username, password, role) values("User", "user", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "USER");
+insert into Users(fullname, username, password, role) values("Administrator", "admin", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "ROLE_ADMIN");
+insert into Users(fullname, username, password, role) values("User", "user", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "ROLE_USER");
+insert into Users(fullname, username, password, role) values("Remi DERONZIER", "remi", "$2a$10$PvuWH6/lRxKiqqic4IalI.BJuL3BdUH5fsh/2nKmr3Yvi9MIejEqO", "ROLE_ADMIN");
+insert into Users(fullname, username, password, role) values("Thomas DERONZIER", "thomas", "$2a$10$/.xmSR6WXl7Qf5KZkt6KquXA/9SCGIwvKNmvCTk629ZFg7ZmHxCAu", "ROLE_USER");

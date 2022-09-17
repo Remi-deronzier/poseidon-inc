@@ -1,4 +1,4 @@
-package com.nnk.springboot.config;
+package com.nnk.springboot.app;
 
 import java.io.IOException;
 
@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.ContentCachingRequestWrapper;
+
+import com.nnk.springboot.util.RequestLoggingUtil;
 
 @Component
 public class ApplicationRequestInterceptor extends HandlerInterceptorAdapter {
