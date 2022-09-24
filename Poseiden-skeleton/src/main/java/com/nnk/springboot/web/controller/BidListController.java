@@ -18,7 +18,10 @@ import com.nnk.springboot.service.BidListService;
 import com.nnk.springboot.web.dto.BidListDto;
 import com.nnk.springboot.web.model.BidList;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 public class BidListController {
     @Autowired
     private BidListService bidListService;
@@ -26,6 +29,7 @@ public class BidListController {
     @GetMapping("/bidList/list")
     public String home(Model model) {
         List<BidList> bidLists = bidListService.findAll();
+        log.info("BidLists retrieved with length = {}", bidLists.size());
         List<BidListDto> bidListDtos = bidLists.stream().map(bid -> convertToDto(bid)).collect(Collectors.toList());
         model.addAttribute("bidListDtos", bidListDtos);
         return "bidList/list";
@@ -39,7 +43,9 @@ public class BidListController {
 
     @PostMapping("/bidList/validate")
     public String validate(@Valid BidListDto bidListDto, BindingResult result) {
+        log.info("Valid BidList object");
         if (!result.hasErrors()) {
+            log.info("Invalid BidList object");
             BidList bidList = convertToEntity(bidListDto);
             bidListService.save(bidList);
             return "redirect:/bidList/list";
@@ -50,6 +56,7 @@ public class BidListController {
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         BidList bidList = bidListService.findById(id);
+        log.info("BidList with id {} retrieved", id);
         BidListDto bidListDto = convertToDto(bidList);
         model.addAttribute("bidListDto", bidListDto);
         return "bidList/update";
@@ -58,7 +65,9 @@ public class BidListController {
     @PostMapping("/bidList/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid BidListDto bidListdDto,
             BindingResult result) {
+        log.info("Valid BidList object");
         if (result.hasErrors()) {
+            log.info("Invalid BidList object");
             return "bidList/update";
         }
         BidList bidList = convertToEntity(bidListdDto);
@@ -69,6 +78,7 @@ public class BidListController {
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id) {
         bidListService.delete(id);
+        log.info("Bidlist with id {} successfully deleted", id);
         return "redirect:/bidList/list";
     }
 

@@ -19,7 +19,10 @@ import com.nnk.springboot.service.UserService;
 import com.nnk.springboot.web.dto.UserDto;
 import com.nnk.springboot.web.model.User;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 public class UserController {
     @Autowired
     private UserService userService;
@@ -27,6 +30,7 @@ public class UserController {
     @RequestMapping("/user/list")
     public String home(Model model) {
         List<User> users = userService.findAll();
+        log.info("Users retrieved with length = {}", users.size());
         List<UserDto> userDtos = users.stream().map(user -> convertToDto(user))
                 .collect(Collectors.toList());
         model.addAttribute("userDtos", userDtos);
@@ -40,7 +44,9 @@ public class UserController {
 
     @PostMapping("/user/validate")
     public String validate(@Valid UserDto userDto, BindingResult result, Model model) {
+        log.info("Valid User object");
         if (!result.hasErrors()) {
+            log.info("Invalid User object");
             User user = convertToEntity(userDto);
             userService.save(user);
             return "redirect:/user/list";
@@ -51,6 +57,7 @@ public class UserController {
     @GetMapping("/user/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         User user = userService.findById(id);
+        log.info("User with id {} retrieved", id);
         UserDto userDto = convertToDto(user);
         userDto.setPassword("");
         model.addAttribute("userDto", userDto);
@@ -60,7 +67,9 @@ public class UserController {
     @PostMapping("/user/update/{id}")
     public String updateUser(@PathVariable("id") Integer id, @Valid UserDto userDto,
             BindingResult result, Model model) {
+        log.info("Valid User object");
         if (result.hasErrors()) {
+            log.info("Invalid User object");
             return "user/update";
         }
         User user = convertToEntity(userDto);
@@ -71,6 +80,7 @@ public class UserController {
     @GetMapping("/user/delete/{id}")
     public String deleteUser(@PathVariable("id") Integer id, Model model) {
         userService.delete(id);
+        log.info("User with id {} successfully deleted", id);
         return "redirect:/user/list";
     }
 

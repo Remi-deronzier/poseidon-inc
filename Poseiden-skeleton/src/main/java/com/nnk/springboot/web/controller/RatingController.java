@@ -19,7 +19,10 @@ import com.nnk.springboot.service.RatingService;
 import com.nnk.springboot.web.dto.RatingDto;
 import com.nnk.springboot.web.model.Rating;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 public class RatingController {
     @Autowired
     private RatingService ratingService;
@@ -27,6 +30,7 @@ public class RatingController {
     @RequestMapping("/rating/list")
     public String home(Model model) {
         List<Rating> ratings = ratingService.findAll();
+        log.info("Ratings retrieved with length = {}", ratings.size());
         List<RatingDto> ratingDtos = ratings.stream().map(rating -> convertToDto(rating))
                 .collect(Collectors.toList());
         model.addAttribute("ratingDtos", ratingDtos);
@@ -41,7 +45,9 @@ public class RatingController {
 
     @PostMapping("/rating/validate")
     public String validate(@Valid RatingDto ratingDto, BindingResult result, Model model) {
+        log.info("Valid Rating object");
         if (!result.hasErrors()) {
+            log.info("Invalid Rating object");
             Rating rating = convertToEntity(ratingDto);
             ratingService.save(rating);
             return "redirect:/rating/list";
@@ -52,6 +58,7 @@ public class RatingController {
     @GetMapping("/rating/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         Rating rating = ratingService.findById(id);
+        log.info("Rating with id {} retrieved", id);
         RatingDto ratingDto = convertToDto(rating);
         model.addAttribute("ratingDto", ratingDto);
         return "rating/update";
@@ -60,7 +67,9 @@ public class RatingController {
     @PostMapping("/rating/update/{id}")
     public String updateRating(@PathVariable("id") Integer id, @Valid RatingDto ratingDto,
             BindingResult result, Model model) {
+        log.info("Valid Rating object");
         if (result.hasErrors()) {
+            log.info("Invalid Rating object");
             return "rating/update";
         }
         Rating rating = convertToEntity(ratingDto);
@@ -71,6 +80,7 @@ public class RatingController {
     @GetMapping("/rating/delete/{id}")
     public String deleteRating(@PathVariable("id") Integer id, Model model) {
         ratingService.delete(id);
+        log.info("Rating with id {} successfully deleted", id);
         return "redirect:/rating/list";
     }
 
