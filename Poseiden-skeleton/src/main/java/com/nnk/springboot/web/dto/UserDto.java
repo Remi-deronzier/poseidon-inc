@@ -13,14 +13,14 @@ public class UserDto {
     private Integer id;
 
     @NotBlank(message = "Username is mandatory")
-    private String username;
+    private String userName;
 
     @NotBlank(message = "Password is mandatory")
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$", message = "Password must contain at least one upercase letter, one lowercase letter at least one number and one symbol and must be at least 8 characters")
     private String password;
 
     @NotBlank(message = "FullName is mandatory")
-    private String fullname;
+    private String fullName;
 
     @NotBlank(message = "Role is mandatory")
     private String role;

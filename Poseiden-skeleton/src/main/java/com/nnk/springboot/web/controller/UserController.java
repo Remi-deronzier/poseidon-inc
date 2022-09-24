@@ -85,13 +85,13 @@ public class UserController {
     }
 
     private UserDto convertToDto(User entity) {
-        UserDto dto = new UserDto(entity.getId(), entity.getUsername(), entity.getPassword(), entity.getFullname(),
+        UserDto dto = new UserDto(entity.getId(), entity.getUserName(), entity.getPassword(), entity.getFullName(),
                 entity.getRole());
         return dto;
     }
 
     private User convertToEntity(UserDto dto) {
-        User user = new User(dto.getUsername(), dto.getFullname(), dto.getPassword(), dto.getRole());
+        User user = new User(dto.getUserName(), dto.getFullName(), dto.getPassword(), dto.getRole());
         if (!StringUtils.isEmpty(dto.getId())) {
             user.setId(dto.getId());
         }

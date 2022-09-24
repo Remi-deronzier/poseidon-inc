@@ -19,9 +19,9 @@ import lombok.NoArgsConstructor;
 @Table(name = "Users")
 public class User {
 
-    public User(String username, String fullname, String password, String role) {
-        this.username = username;
-        this.fullname = fullname;
+    public User(String userName, String fullName, String password, String role) {
+        this.userName = userName;
+        this.fullName = fullName;
         this.password = password;
         this.role = role;
     }
@@ -31,13 +31,13 @@ public class User {
     private int id;
 
     @Column(nullable = false, unique = true)
-    private String username;
+    private String userName;
 
     @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)
-    private String fullname;
+    private String fullName;
 
     @Column(nullable = false)
     private String role;
