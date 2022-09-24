@@ -13,11 +13,23 @@ import org.springframework.web.util.ContentCachingRequestWrapper;
 
 import com.nnk.springboot.util.RequestLoggingUtil;
 
+/**
+ * This class allows to log every incoming endpoints
+ * 
+ * @author Rémi Deronzier
+ */
 @Component
 public class ApplicationRequestInterceptor extends HandlerInterceptorAdapter {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(ApplicationRequestInterceptor.class);
 
+    /**
+     * @param request
+     * @param response
+     * @param handler
+     * @return boolean
+     * @throws IOException
+     */
     @Override
     public boolean preHandle(
             HttpServletRequest request,
@@ -37,6 +49,13 @@ public class ApplicationRequestInterceptor extends HandlerInterceptorAdapter {
         return true;
     }
 
+    /**
+     * @param request
+     * @param response
+     * @param handler
+     * @param ex
+     * @throws Exception
+     */
     @Override
     public void afterCompletion(
             HttpServletRequest request,
