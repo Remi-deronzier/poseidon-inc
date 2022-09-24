@@ -21,12 +21,21 @@ import com.nnk.springboot.web.model.CurvePoint;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * This class is the controller class for the CurvePoint Entity
+ * 
+ * @author Rémi Deronzier
+ */
 @Controller
 @Slf4j
 public class CurveController {
     @Autowired
     private CurvePointService curvePointService;
 
+    /**
+     * @param model
+     * @return String
+     */
     @RequestMapping("/curvePoint/list")
     public String home(Model model) {
         List<CurvePoint> curvePoints = curvePointService.findAll();
@@ -37,12 +46,22 @@ public class CurveController {
         return "curvePoint/list";
     }
 
+    /**
+     * @param model
+     * @return String
+     */
     @GetMapping("/curvePoint/add")
     public String addBidForm(Model model) {
         model.addAttribute("curvePointDto", new CurvePointDto(null, 0, 0, 0));
         return "curvePoint/add";
     }
 
+    /**
+     * @param curvePointDto
+     * @param result
+     * @param model
+     * @return String
+     */
     @PostMapping("/curvePoint/validate")
     public String validate(@Valid CurvePointDto curvePointDto, BindingResult result, Model model) {
         log.info("Valid CurvePoint object");
@@ -55,6 +74,11 @@ public class CurveController {
         return "curvePoint/add";
     }
 
+    /**
+     * @param id
+     * @param model
+     * @return String
+     */
     @GetMapping("/curvePoint/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         CurvePoint curvePoint = curvePointService.findById(id);
@@ -64,6 +88,13 @@ public class CurveController {
         return "curvePoint/update";
     }
 
+    /**
+     * @param id
+     * @param curvePointDto
+     * @param result
+     * @param model
+     * @return String
+     */
     @PostMapping("/curvePoint/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid CurvePointDto curvePointDto,
             BindingResult result, Model model) {
@@ -77,6 +108,11 @@ public class CurveController {
         return "redirect:/curvePoint/list";
     }
 
+    /**
+     * @param id
+     * @param model
+     * @return String
+     */
     @GetMapping("/curvePoint/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
         curvePointService.delete(id);
@@ -84,11 +120,19 @@ public class CurveController {
         return "redirect:/curvePoint/list";
     }
 
+    /**
+     * @param entity
+     * @return CurvePointDto
+     */
     private CurvePointDto convertToDto(CurvePoint entity) {
         CurvePointDto dto = new CurvePointDto(entity.getId(), entity.getCurveId(), entity.getTerm(), entity.getValue());
         return dto;
     }
 
+    /**
+     * @param dto
+     * @return CurvePoint
+     */
     private CurvePoint convertToEntity(CurvePointDto dto) {
         CurvePoint curvePoint = new CurvePoint(dto.getCurveId(), dto.getTerm(), dto.getValue());
         if (!StringUtils.isEmpty(dto.getId())) {

@@ -16,6 +16,12 @@ import org.springframework.stereotype.Service;
 import com.nnk.springboot.repository.UserRepository;
 import com.nnk.springboot.web.model.User;
 
+/**
+ * This class allows to configure the UserDetailsService when a user is logging
+ * (get appropriate authorities + useful information in the DB)
+ * 
+ * @author Rémi Deronzier
+ */
 @Service
 @Transactional
 public class ApplicationUserDetailsService implements UserDetailsService {
@@ -23,6 +29,11 @@ public class ApplicationUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * @param username
+     * @return UserDetails
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         final User user = userRepository.findByUserName(username)
@@ -34,6 +45,10 @@ public class ApplicationUserDetailsService implements UserDetailsService {
                 true, true, getAuthorities(user.getRole()));
     }
 
+    /**
+     * @param role
+     * @return Collection<? extends GrantedAuthority>
+     */
     private Collection<? extends GrantedAuthority> getAuthorities(String role) {
         return Arrays.asList(new SimpleGrantedAuthority(role));
     }

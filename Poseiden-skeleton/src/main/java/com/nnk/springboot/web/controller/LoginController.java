@@ -8,6 +8,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.nnk.springboot.repository.UserRepository;
 
+/**
+ * This class is the controller class for the Login page
+ * 
+ * @author Rémi Deronzier
+ */
 @Controller
 @RequestMapping("app")
 public class LoginController {
@@ -15,6 +20,9 @@ public class LoginController {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * @return ModelAndView
+     */
     @GetMapping("login")
     public ModelAndView login() {
         ModelAndView mav = new ModelAndView();
@@ -22,6 +30,9 @@ public class LoginController {
         return mav;
     }
 
+    /**
+     * @return ModelAndView
+     */
     @GetMapping("secure/article-details")
     public ModelAndView getAllUserArticles() {
         ModelAndView mav = new ModelAndView();
@@ -30,6 +41,9 @@ public class LoginController {
         return mav;
     }
 
+    /**
+     * @return ModelAndView
+     */
     @GetMapping("error")
     public ModelAndView error() {
         ModelAndView mav = new ModelAndView();

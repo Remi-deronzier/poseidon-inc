@@ -6,6 +6,11 @@ import javax.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * This class is the DTO class for the User Entity
+ * 
+ * @author Rémi Deronzier
+ */
 @Data
 @AllArgsConstructor
 public class UserDto {

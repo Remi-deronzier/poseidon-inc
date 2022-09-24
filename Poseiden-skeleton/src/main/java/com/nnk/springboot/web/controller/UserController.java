@@ -21,12 +21,21 @@ import com.nnk.springboot.web.model.User;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * This class is the controller class for the User Entity
+ * 
+ * @author Rémi Deronzier
+ */
 @Controller
 @Slf4j
 public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * @param model
+     * @return String
+     */
     @RequestMapping("/user/list")
     public String home(Model model) {
         List<User> users = userService.findAll();
@@ -37,11 +46,21 @@ public class UserController {
         return "user/list";
     }
 
+    /**
+     * @param userDto
+     * @return String
+     */
     @GetMapping("/user/add")
     public String addUser(UserDto userDto) {
         return "user/add";
     }
 
+    /**
+     * @param userDto
+     * @param result
+     * @param model
+     * @return String
+     */
     @PostMapping("/user/validate")
     public String validate(@Valid UserDto userDto, BindingResult result, Model model) {
         log.info("Valid User object");
@@ -54,6 +73,11 @@ public class UserController {
         return "user/add";
     }
 
+    /**
+     * @param id
+     * @param model
+     * @return String
+     */
     @GetMapping("/user/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         User user = userService.findById(id);
@@ -64,6 +88,13 @@ public class UserController {
         return "user/update";
     }
 
+    /**
+     * @param id
+     * @param userDto
+     * @param result
+     * @param model
+     * @return String
+     */
     @PostMapping("/user/update/{id}")
     public String updateUser(@PathVariable("id") Integer id, @Valid UserDto userDto,
             BindingResult result, Model model) {
@@ -77,6 +108,11 @@ public class UserController {
         return "redirect:/user/list";
     }
 
+    /**
+     * @param id
+     * @param model
+     * @return String
+     */
     @GetMapping("/user/delete/{id}")
     public String deleteUser(@PathVariable("id") Integer id, Model model) {
         userService.delete(id);
@@ -84,12 +120,20 @@ public class UserController {
         return "redirect:/user/list";
     }
 
+    /**
+     * @param entity
+     * @return UserDto
+     */
     private UserDto convertToDto(User entity) {
         UserDto dto = new UserDto(entity.getId(), entity.getUserName(), entity.getPassword(), entity.getFullName(),
                 entity.getRole());
         return dto;
     }
 
+    /**
+     * @param dto
+     * @return User
+     */
     private User convertToEntity(UserDto dto) {
         User user = new User(dto.getUserName(), dto.getFullName(), dto.getPassword(), dto.getRole());
         if (!StringUtils.isEmpty(dto.getId())) {
