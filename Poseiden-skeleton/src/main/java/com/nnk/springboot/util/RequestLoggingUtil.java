@@ -10,8 +10,18 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.web.util.ContentCachingRequestWrapper;
 import org.springframework.web.util.WebUtils;
 
+/**
+ * This class allows to create the logging repsponse for every incoming http
+ * request
+ * 
+ * @author Rémi Deronzier
+ */
 public class RequestLoggingUtil {
 
+    /**
+     * @param is
+     * @return String
+     */
     public static String getStringFromInputStream(InputStream is) {
         StringWriter writer = new StringWriter();
         String encoding = "UTF-8";
@@ -23,6 +33,11 @@ public class RequestLoggingUtil {
         return writer.toString();
     }
 
+    /**
+     * @param request
+     * @return String
+     * @throws IOException
+     */
     public static String readPayload(final HttpServletRequest request) throws IOException {
         String payloadData = null;
         ContentCachingRequestWrapper contentCachingRequestWrapper = WebUtils.getNativeRequest(request,

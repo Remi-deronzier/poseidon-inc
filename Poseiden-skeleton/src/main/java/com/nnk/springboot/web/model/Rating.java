@@ -11,6 +11,11 @@ import org.hibernate.annotations.DynamicUpdate;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * This class is the POJO class for the Rating Entity
+ * 
+ * @author Rémi Deronzier
+ */
 @Entity
 @Data
 @NoArgsConstructor

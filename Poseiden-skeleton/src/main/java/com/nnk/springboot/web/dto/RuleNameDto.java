@@ -4,6 +4,11 @@ import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 
+/**
+ * This class is the DTO class for the RuleName Entity
+ * 
+ * @author Rémi Deronzier
+ */
 @Data
 public class RuleNameDto {
 

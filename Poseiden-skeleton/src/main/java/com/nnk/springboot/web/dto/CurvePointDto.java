@@ -4,6 +4,11 @@ import javax.validation.constraints.Digits;
 
 import lombok.Data;
 
+/**
+ * This class is the DTO class for the CurvePoint Entity
+ * 
+ * @author Rémi Deronzier
+ */
 @Data
 public class CurvePointDto {
 

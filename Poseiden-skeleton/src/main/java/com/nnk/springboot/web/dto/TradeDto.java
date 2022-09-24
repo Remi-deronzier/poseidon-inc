@@ -5,6 +5,11 @@ import javax.validation.constraints.Positive;
 
 import lombok.Data;
 
+/**
+ * This class is the DTO class for the Trade Entity
+ * 
+ * @author Rémi Deronzier
+ */
 @Data
 public class TradeDto {
 

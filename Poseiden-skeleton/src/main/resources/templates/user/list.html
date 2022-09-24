@@ -29,8 +29,8 @@
           <tbody>
             <tr th:each="userDto : ${userDtos}">
               <td style="width: 10%" th:text="${userDto.id}"></td>
-              <td th:text="${userDto.fullname}"></td>
-              <td th:text="${userDto.username}"></td>
+              <td th:text="${userDto.fullName}"></td>
+              <td th:text="${userDto.userName}"></td>
               <td style="width: 25%" th:text="${userDto.role}"></td>
               <td style="width: 15%" class="text-center">
                 <a th:href="@{/user/update/{id}(id=${userDto.id})}">Edit</a

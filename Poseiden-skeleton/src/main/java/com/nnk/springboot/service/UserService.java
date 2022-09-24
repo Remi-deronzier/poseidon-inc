@@ -10,6 +10,11 @@ import org.springframework.stereotype.Service;
 import com.nnk.springboot.repository.UserRepository;
 import com.nnk.springboot.web.model.User;
 
+/**
+ * This class contains the business logic for the User Entity
+ * 
+ * @author Rémi Deronzier
+ */
 @Service
 public class UserService {
 
@@ -19,20 +24,34 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * @return List<User>
+     */
     public List<User> findAll() {
         return userRepository.findAll();
     }
 
+    /**
+     * @param id
+     * @return User
+     */
     public User findById(int id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid User Id:" + id));
     }
 
+    /**
+     * @param user
+     * @return User
+     */
     public User save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
+    /**
+     * @param id
+     */
     public void delete(int id) {
         Optional<User> optionalCurvePoint = userRepository.findById(id);
         if (optionalCurvePoint.isPresent()) {

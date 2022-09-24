@@ -87,16 +87,16 @@ CREATE TABLE rule_name (
 
 CREATE TABLE users (
   id tinyint(4) NOT NULL AUTO_INCREMENT,
-  username VARCHAR(125) NOT NULL,
+  user_name VARCHAR(125) NOT NULL,
   password VARCHAR(125) NOT NULL,
-  fullname VARCHAR(125) NOT NULL,
+  full_name VARCHAR(125) NOT NULL,
   role VARCHAR(125) NOT NULL,
 
   PRIMARY KEY (Id),
-  UNIQUE (username)
+  UNIQUE (user_name)
 );
 
-insert into Users(fullname, username, password, role) values("Administrator", "admin", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "ROLE_ADMIN");
-insert into Users(fullname, username, password, role) values("User", "user", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "ROLE_USER");
-insert into Users(fullname, username, password, role) values("Remi DERONZIER", "remi", "$2a$10$PvuWH6/lRxKiqqic4IalI.BJuL3BdUH5fsh/2nKmr3Yvi9MIejEqO", "ROLE_ADMIN");
-insert into Users(fullname, username, password, role) values("Thomas DERONZIER", "thomas", "$2a$10$/.xmSR6WXl7Qf5KZkt6KquXA/9SCGIwvKNmvCTk629ZFg7ZmHxCAu", "ROLE_USER");
+insert into Users(full_name, user_name, password, role) values("Administrator", "admin", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "ROLE_ADMIN");
+insert into Users(full_name, user_name, password, role) values("User", "user", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "ROLE_USER");
+insert into Users(full_name, user_name, password, role) values("Remi DERONZIER", "remi", "$2a$10$PvuWH6/lRxKiqqic4IalI.BJuL3BdUH5fsh/2nKmr3Yvi9MIejEqO", "ROLE_ADMIN");
+insert into Users(full_name, user_name, password, role) values("Thomas DERONZIER", "thomas", "$2a$10$/.xmSR6WXl7Qf5KZkt6KquXA/9SCGIwvKNmvCTk629ZFg7ZmHxCAu", "ROLE_USER");
